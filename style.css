@@ -1,29 +1,45 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
-    font-family:  sans-serif;
+
+    font-family: sans-serif;
     font-weight: 300;
+
 }
 
 body {
 
     height: 100vh;
+    background-color: #EDEBFD;
 
+}
+
+.wrapper {
+     display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 18rem;
+    
+ 
+
+    
 
 }
 
 
-.input-container{
+
+.input-container {
 
     display: flex;
     justify-content: center;
-    gap:  25px;
+    gap: 25px;
     margin-top: 40px;
- 
-     
+
+
 }
-.input-container > form {
+
+.input-container>form {
     width: 600px;
     height: 35px;
     outline: 1px solid rgb(81, 67, 165);
@@ -31,7 +47,7 @@ body {
     border-radius: 5px;
     display: flex;
     align-items: center;
-   
+
 
 
 }
@@ -41,7 +57,7 @@ form>input {
     border: none;
     outline: none;
     padding: 16px 10px;
-   
+    background-color: #EDEBFD;
     width: 100%;
     margin-right: 2px;
     font-size: 16px;
@@ -61,12 +77,55 @@ input[type="submit"] {
     cursor: pointer;
     color: #000;
     text-align: center;
-    
+
 }
 
 form>i {
-  
+
     cursor: pointer;
     margin-left: 5px;
+
+}
+
+
+.hero-container {
+    display: flex;
+    width: 725px;
+    gap: 1px;
+    margin-top: 1rem;
+ 
+}
+   
+#character {
+    margin-top:4rem;
+    margin-left: 5px;
+ }
+
+ 
+
+img {
+    height: 200px;
+ }
+
+.hero-description {
+    
+    outline: 1px solid #000;
+    height: 200px;
+    background-color: #82DFFD;
+     
+}
+
+
+.hero-description h3 {
+    font-weight: 600;
+    font-size: 25px;
+    text-decoration: underline;
+
+
+}
+
+.hero-description h3,
+p {
+    margin: 10px;
 
 }
