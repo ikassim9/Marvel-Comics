@@ -1,31 +1,9 @@
-* {
-    padding: 0;
-    margin: 0;
+*,
+*::before,
+*a::after {
+    font-family: 'open sans''sans-serif';
 
-    font-family: sans-serif;
-    font-weight: 300;
-
-}
-
-body {
-
-    height: 100vh;
-    background-color: #EDEBFD;
-
-}
-
-.wrapper {
-     display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: start;
-    margin-left: 18rem;
-    
- 
-
-    
-
-}
+} 
 
 
 
@@ -34,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 25px;
-    margin-top: 40px;
+    margin-top: 30px;
 
 
 }
@@ -47,6 +25,7 @@ body {
     border-radius: 5px;
     display: flex;
     align-items: center;
+    margin-bottom: 2.5rem;
 
 
 
@@ -57,7 +36,6 @@ form>input {
     border: none;
     outline: none;
     padding: 16px 10px;
-    background-color: #EDEBFD;
     width: 100%;
     margin-right: 2px;
     font-size: 16px;
@@ -88,44 +66,67 @@ form>i {
 }
 
 
-.hero-container {
-    display: flex;
-    width: 725px;
-    gap: 1px;
-    margin-top: 1rem;
- 
-}
+
+
+
+
+.hero-grid{
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 0.5rem;
+    grid-row-gap: 2.5rem;
    
-#character {
-    margin-top:4rem;
-    margin-left: 5px;
- }
+}
 
+/* Use this to mage the first card long */
+.hero-card.header{
+
+    grid-column: span 3;
+}
+.hero-card {
+
+    background: #FFF;
+    padding: 1rem;
+    border: none;
+    box-shadow: 0 2px 5px 0 #000;
+    border-radius: .25rem;
+    
+}
+
+.card-header {
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+
+.card-header.card-image{
+
+overflow: hidden;
+
+
+}
+
+.card-header.card-image > img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    max-height: 200px;
+    margin-bottom: .5rem;
  
 
-img {
-    height: 200px;
- }
-
-.hero-description {
-    
-    outline: 1px solid #000;
-    height: 200px;
-    background-color: #82DFFD;
-     
 }
 
 
-.hero-description h3 {
-    font-weight: 600;
-    font-size: 25px;
-    text-decoration: underline;
 
-
+.card-footer {
+    margin-top: .5rem;
+    font-size: 0.9rem;
 }
 
-.hero-description h3,
-p {
-    margin: 10px;
 
+.span-label{
+    display: block;
+    margin-top: 0.5rem;
 }
