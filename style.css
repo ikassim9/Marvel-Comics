@@ -1,3 +1,4 @@
+
 *,
 *::before,
 *a::after {
@@ -66,45 +67,98 @@ form>i {
 }
 
 
+ 
 
 
-
-
-.hero-grid{
+.card-grid{
 
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     gap: 0.5rem;
     grid-row-gap: 2.5rem;
+    
    
 }
 
-/* Use this to mage the first card long */
-.hero-card.header{
 
-    grid-column: span 3;
-}
 .hero-card {
-
+    --padding: 1rem;
     background: #FFF;
-    padding: 1rem;
+    overflow: hidden;
     border: none;
     box-shadow: 0 2px 5px 0 #000;
     border-radius: .25rem;
+    overflow: hidden;
+    
     
 }
 
 .card-header {
     font-size: 1.5rem;
     margin-bottom: .5rem;
+    padding: var(--padding);
+    padding-bottom: 0;
+   
 }
+
+/* Use this to mage the first card long */
+.hero-card.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+     grid-column: span 2;
+}
+ 
+ 
+
+/* This will be used for display a hero image next the card detail */
+
+.card-detail{
+    font-size: 1rem;
+    padding: 0 var(--padding);
+}
+
+.hero-name{
+    display: block;
+    padding:  var(--padding);
+     
+
+}
+
+.hero-img{
+
+    background: #FFF;
+    border: none;
+    box-shadow: 0 2px 5px 0 #000;
+    border-radius: .125rem;
+   
+
+
+}
+
+.img-body{
+    overflow: hidden;
+    padding: 0px;
+    
+}
+
+.img-body > img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    max-height: 230px;
+    object-position: center;
+
+}
+
 
 
 .card-header.card-image{
 
 overflow: hidden;
-
-
+padding: 0;
 }
 
 .card-header.card-image > img {
@@ -114,6 +168,7 @@ overflow: hidden;
     object-fit: cover;
     max-height: 200px;
     margin-bottom: .5rem;
+    object-position: center;
  
 
 }
@@ -121,12 +176,19 @@ overflow: hidden;
 
 
 .card-footer {
-    margin-top: .5rem;
+   margin-top: 0.5rem;
     font-size: 0.9rem;
+    padding: 1.5rem var(--padding);
+    padding-top: 1rem;
+    margin-bottom: 0;
+    background-color: rgb(209, 183, 69);
+
+
 }
 
 
 .span-label{
     display: block;
-    margin-top: 0.5rem;
+    margin-top: var(--padding);
 }
+ 
