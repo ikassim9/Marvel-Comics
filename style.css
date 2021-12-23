@@ -148,7 +148,7 @@ form>i {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    max-height: 230px;
+    max-height: 240px;
     object-position: center;
 
 }
@@ -191,4 +191,4 @@ padding: 0;
     display: block;
     margin-top: var(--padding);
 }
- 
+  
