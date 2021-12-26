@@ -159,6 +159,7 @@ form>i {
 
 overflow: hidden;
 padding: 0;
+margin-bottom: -20px;
 }
 
 .card-header.card-image > img {
