@@ -97,7 +97,12 @@ async function createHeroCard(){
 // add data to the hero card, add the hero name, description and attribution
 
     heroName.innerHTML = hero.name;
+    if(hero.description !== ""){
     heroDescription.innerHTML = hero.description;
+    }
+    else{
+        heroDescription.innerHTML = "No description available for this hero";
+    }
     heroAttribution.innerHTML = getAttributionText();
 
 
