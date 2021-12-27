@@ -13,31 +13,14 @@ const currentYear = new Date().getFullYear();
 
 searchBtn.addEventListener('click', (e) => {
     e.preventDefault();
-   
     createHeroCard();
+
 });
 
 
 
+// get the hero the user searched for
 
-/** Take the hero the user searched for and send a get request for that particular hero */
-
-async function getComicsFromHero() {
-
-const hero = await getHero();
-console.log(hero);
-console.log("comics", hero.comics );
-const comics = hero.comics.items;
-comics.forEach(comic => {
-    
- console.log("Comic: " ,comic);
- 
-});
-}
-
- 
-
- 
 async function getHero() {
 
     let request = base_url + `/characters?name=${searchInput.value}&ts=${ts}&apikey=${CONSTANT.apiKey}&hash=${hash}`
@@ -50,10 +33,26 @@ async function getHero() {
 
 }
 
+
+// get comics for the hero by passing in heroID
+
+async function getComics(heroID) {
+
+    let request = base_url + `/characters/${heroID}/comics?ts=${ts}&apikey=${CONSTANT.apiKey}&hash=${hash}`
+    let body = await fetch(request);
+    let response = await body.json();
+    console.log("resp: ", response);
+
+    return response.data.results;
+
+}
+
+
+
+
 // this functions takes the hero data and creates a grid card
-async function createHeroCard(){
+async function createHeroCard() {
     const hero = await getHero();
-    
     // hero card which holds the entire hero
     let heroCard = document.createElement('div');
     heroCard.classList.add('hero-card');
@@ -69,12 +68,12 @@ async function createHeroCard(){
 
 
 
-// create hero detail this will contain hero descrption
+    // create hero detail this will contain hero descrption
 
     let heroDetail = document.createElement('div')
     heroDetail.classList.add('card-detail');
     let heroDescription = document.createElement('p');
-    heroDescription.classList.add('hero-description');
+
 
     // create two spans for the hero
 
@@ -94,13 +93,12 @@ async function createHeroCard(){
 
 
 
-// add data to the hero card, add the hero name, description and attribution
+    // add data to the hero card, add the hero name, description and attribution
 
     heroName.innerHTML = hero.name;
-    if(hero.description !== ""){
-    heroDescription.innerHTML = hero.description;
-    }
-    else{
+    if (hero.description !== "") {
+        heroDescription.innerHTML = hero.description;
+    } else {
         heroDescription.innerHTML = "No description available for this hero";
     }
     heroAttribution.innerHTML = getAttributionText();
@@ -134,6 +132,10 @@ async function createHeroCard(){
     heroGrid.appendChild(heroCard);
     heroGrid.appendChild(heroImageContainer);
 
+    // create comic card and add it to the grid
+
+    createComicCard(hero.id);
+
 
 }
 
@@ -142,4 +144,97 @@ async function createHeroCard(){
 function getAttributionText() {
     const attributionText = `Data provided by Marvel. © ${currentYear} Marvel`;
     return attributionText;
+}
+
+async function createComicCard(heroID) {
+    const comics = await getComics(heroID);
+    console.log("comics", comics);
+
+    // loop through comics and create a comic for each comic in the array
+    console.log("comics count", comics.length);
+    comics.forEach(comic => {
+        console.log("Current Comic: ", comic);
+
+        //create comic container
+
+        let comic_card = document.createElement('div');
+        comic_card.classList.add('hero-card');
+
+
+        // create comic image container
+
+        let comicImageContainer = document.createElement('div');
+        comicImageContainer.classList.add('card-header', 'card-image');
+        let comic_img = document.createElement('img');
+        let comicName = document.createElement('span');
+        comicName.classList.add('comic-name');
+
+
+
+        // create comic detail
+
+        let comicDetail = document.createElement('div');
+        comicDetail.classList.add('card-detail');
+        let comicDescription = document.createElement('p');
+
+
+
+        // create comic footer
+
+        let comicFooter = document.createElement('div');
+        comicFooter.classList.add('card-footer');
+        let comicAttribution = document.createElement('p');
+
+        comicImageContainer.appendChild(comic_img);
+        comicImageContainer.appendChild(comicName);
+
+        // add data to the comic image container
+
+        comic_img.src = comic.thumbnail.path + '.' + comic.thumbnail.extension;
+
+
+        // add data to the comic detail
+        comicName.innerHTML = comic.title;
+
+        if (comic.description !== '' || comic.description !== null) {
+            comicDescription.innerText = comic.description;
+        } else {
+            comicDescription.innerHTML = "No description available for this comic";
+        }
+
+
+        // add data to the comic footer
+
+        comicAttribution.innerHTML = getAttributionText();
+
+
+
+
+
+        // append the comic image and comic name to the comic image container
+
+
+
+
+        // append comic description  to the comic detail
+
+        comicDetail.appendChild(comicDescription);
+        comicDetail.appendChild(comicAttribution);
+
+
+        // append comic attribution to the comic container
+        comicFooter.appendChild(comicAttribution);
+
+
+        // append comic image container, comic detail and comic footer to the comic container
+        comic_card.appendChild(comicImageContainer);
+        comic_card.appendChild(comicDetail);
+        comic_card.appendChild(comicFooter);
+
+
+        // add comic container to the grid
+        cardGrid.appendChild(comic_card);
+
+
+    });
 }
