@@ -76,6 +76,7 @@ form>i {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     gap: 0.5rem;
     grid-row-gap: 2.5rem;
+    align-items: flex-start;
     
    
 }
@@ -119,9 +120,11 @@ form>i {
     padding: 0 var(--padding);
 }
 
-.hero-name{
+.hero-name,
+.comic-name {
     display: block;
-    padding:  var(--padding);
+    padding: var(--padding);
+    font-size: 25px;
      
 
 }
@@ -162,14 +165,16 @@ padding: 0;
 margin-bottom: -20px;
 }
 
-.card-header.card-image > img {
+.card-header.card-image>img {
     display: block;
     width: 100%;
-    aspect-ratio: 16/9;
+
     object-fit: cover;
-    max-height: 200px;
     margin-bottom: .5rem;
     object-position: center;
+    max-height: 600px;
+
+
  
 
 }
