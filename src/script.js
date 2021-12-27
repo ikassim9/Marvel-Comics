@@ -12,7 +12,6 @@ const currentYear = new Date().getFullYear();
 // event for when search button is clicked
 
 searchBtn.addEventListener('click', (e) => {
-    e.preventDefault();
     createHeroCard();
 
 });
@@ -28,7 +27,6 @@ async function getHero() {
     const body = await fetch(request);
     const response = await body.json();
     const hero = response.data.results[0];
-    console.log(hero);
     return hero;
 
 }
@@ -41,8 +39,6 @@ async function getComics(heroID) {
     let request = base_url + `/characters/${heroID}/comics?ts=${ts}&apikey=${CONSTANT.apiKey}&hash=${hash}`
     let body = await fetch(request);
     let response = await body.json();
-    console.log("resp: ", response);
-
     return response.data.results;
 
 }
@@ -148,12 +144,9 @@ function getAttributionText() {
 
 async function createComicCard(heroID) {
     const comics = await getComics(heroID);
-    console.log("comics", comics);
 
     // loop through comics and create a comic for each comic in the array
-    console.log("comics count", comics.length);
     comics.forEach(comic => {
-        console.log("Current Comic: ", comic);
 
         //create comic container
 
@@ -196,9 +189,10 @@ async function createComicCard(heroID) {
         // add data to the comic detail
         comicName.innerHTML = comic.title;
 
-        if (comic.description !== '' || comic.description !== null) {
+        if (comic.description !== '' && comic.description !== null) {
             comicDescription.innerText = comic.description;
         } else {
+
             comicDescription.innerHTML = "No description available for this comic";
         }
 
