@@ -12,7 +12,10 @@ const currentYear = new Date().getFullYear();
 // event for when search button is clicked
 
 searchBtn.addEventListener('click', (e) => {
+
     createHeroCard();
+
+
 
 });
 
@@ -26,11 +29,20 @@ async function getHero() {
 
     const body = await fetch(request);
     const response = await body.json();
-    const hero = response.data.results[0];
-    return hero;
+    console.log(response);
+    if (response.code === 200) {
+        if (response.data.count == 1) {
+            removeChildElements();
 
+            const hero = response.data.results[0];
+            console.log("hero", hero);
+            return hero;
+        } else {
+            alert('Hero not found');
+        }
+
+    }
 }
-
 
 // get comics for the hero by passing in heroID
 
@@ -49,6 +61,7 @@ async function getComics(heroID) {
 // this functions takes the hero data and creates a grid card
 async function createHeroCard() {
     const hero = await getHero();
+
     // hero card which holds the entire hero
     let heroCard = document.createElement('div');
     heroCard.classList.add('hero-card');
@@ -125,8 +138,8 @@ async function createHeroCard() {
 
 
     // add the hero card to the grid
-    heroGrid.appendChild(heroCard);
-    heroGrid.appendChild(heroImageContainer);
+    cardGrid.appendChild(heroCard);
+    cardGrid.appendChild(heroImageContainer);
 
     // create comic card and add it to the grid
 
@@ -144,7 +157,7 @@ function getAttributionText() {
 
 async function createComicCard(heroID) {
     const comics = await getComics(heroID);
-
+    console.log(comics);
     // loop through comics and create a comic for each comic in the array
     comics.forEach(comic => {
 
@@ -169,6 +182,9 @@ async function createComicCard(heroID) {
         let comicDetail = document.createElement('div');
         comicDetail.classList.add('card-detail');
         let comicDescription = document.createElement('p');
+        let pageCount = document.createElement('p');
+
+        let comicPrice = document.createElement('p');
 
 
 
@@ -188,7 +204,8 @@ async function createComicCard(heroID) {
 
         // add data to the comic detail
         comicName.innerHTML = comic.title;
-
+        comicPrice.innerHTML = "price: " + comic.prices[0].price;
+        pageCount.innerHTML = "page count: " + comic.pageCount;
         if (comic.description !== '' && comic.description !== null) {
             comicDescription.innerText = comic.description;
         } else {
@@ -214,7 +231,8 @@ async function createComicCard(heroID) {
 
         comicDetail.appendChild(comicDescription);
         comicDetail.appendChild(comicAttribution);
-
+        comicDetail.appendChild(comicPrice);
+        comicDetail.appendChild(pageCount);
 
         // append comic attribution to the comic container
         comicFooter.appendChild(comicAttribution);
@@ -231,4 +249,14 @@ async function createComicCard(heroID) {
 
 
     });
+}
+
+// this function is removes the child elements of the grid so we can populate it with new data once the user searches for a new hero
+function removeChildElements() {
+    if (cardGrid.hasChildNodes()) {
+        while (cardGrid.firstChild) {
+            cardGrid.removeChild(cardGrid.firstChild);
+        }
+    }
+    return;
 }

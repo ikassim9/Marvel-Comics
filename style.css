@@ -1,11 +1,11 @@
-
 *,
 *::before,
 *a::after {
     font-family: 'open sans''sans-serif';
 
-} 
+}
 
+body {}
 
 
 .input-container {
@@ -67,18 +67,18 @@ form>i {
 }
 
 
- 
 
 
-.card-grid{
+
+.card-grid {
 
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     gap: 0.5rem;
     grid-row-gap: 2.5rem;
     align-items: flex-start;
-    
-   
+
+
 }
 
 
@@ -90,8 +90,8 @@ form>i {
     box-shadow: 0 2px 5px 0 #000;
     border-radius: .25rem;
     overflow: hidden;
-    
-    
+
+
 }
 
 .card-header {
@@ -99,23 +99,23 @@ form>i {
     margin-bottom: .5rem;
     padding: var(--padding);
     padding-bottom: 0;
-   
+
 }
 
 /* Use this to mage the first card long */
-.hero-card.header{
+.hero-card.header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  
-     grid-column: span 2;
+
+    grid-column: span 2;
 }
- 
- 
+
+
 
 /* This will be used for display a hero image next the card detail */
 
-.card-detail{
+.card-detail {
     font-size: 1rem;
     padding: 0 var(--padding);
 }
@@ -125,28 +125,28 @@ form>i {
     display: block;
     padding: var(--padding);
     font-size: 25px;
-     
+
 
 }
 
-.hero-img{
+.hero-img {
 
     background: #FFF;
     border: none;
     box-shadow: 0 2px 5px 0 #000;
     border-radius: .125rem;
-   
+
 
 
 }
 
-.img-body{
+.img-body {
     overflow: hidden;
     padding: 0px;
-    
+
 }
 
-.img-body > img {
+.img-body>img {
     display: block;
     width: 100%;
     aspect-ratio: 16/9;
@@ -158,11 +158,11 @@ form>i {
 
 
 
-.card-header.card-image{
+.card-header.card-image {
 
-overflow: hidden;
-padding: 0;
-margin-bottom: -20px;
+    overflow: hidden;
+    padding: 0;
+    margin-bottom: -20px;
 }
 
 .card-header.card-image>img {
@@ -175,14 +175,16 @@ margin-bottom: -20px;
     max-height: 600px;
 
 
- 
 
 }
 
+span {
+    display: block;
+}
 
 
 .card-footer {
-   margin-top: 0.5rem;
+    margin-top: 0.5rem;
     font-size: 0.9rem;
     padding: 1.5rem var(--padding);
     padding-top: 1rem;
@@ -193,8 +195,7 @@ margin-bottom: -20px;
 }
 
 
-.span-label{
+.span-label {
     display: block;
     margin-top: var(--padding);
 }
-  
