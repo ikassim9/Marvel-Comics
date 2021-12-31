@@ -204,7 +204,8 @@ async function createComicCard(heroID) {
 
         // add data to the comic detail
         comicName.innerHTML = comic.title;
-        comicPrice.innerHTML = "price: " + comic.prices[0].price;
+        if (comic.prices[0].price !== 0)
+            comicPrice.innerHTML = "price: $" + comic.prices[0].price;
         pageCount.innerHTML = "page count: " + comic.pageCount;
         if (comic.description !== '' && comic.description !== null) {
             comicDescription.innerText = comic.description;
