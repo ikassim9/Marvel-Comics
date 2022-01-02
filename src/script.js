@@ -6,6 +6,7 @@ const base_url = new URL('http://gateway.marvel.com/v1/public');
 const searchBtn = document.getElementById('searchBtn');
 const cardGrid = document.getElementById('heroGrid');
 const currentYear = new Date().getFullYear();
+const errorMessage = document.getElementById('errorMessage')
 
 
 
@@ -13,9 +14,12 @@ const currentYear = new Date().getFullYear();
 
 searchBtn.addEventListener('click', (e) => {
 
-    createHeroCard();
-
-
+    if (searchInput.value !== "") {
+        createHeroCard();
+    } else {
+        errorMessage.innerHTML = 'Please enter a character name';
+        errorMessage.style.display = "inline-block";
+    }
 
 });
 
@@ -33,12 +37,14 @@ async function getHero() {
     if (response.code === 200) {
         if (response.data.count == 1) {
             removeChildElements();
-
             const hero = response.data.results[0];
             console.log("hero", hero);
+            errorMessage.style.display = "none";
             return hero;
         } else {
-            alert('Hero not found');
+            // show error message if hero is not return from the api
+            errorMessage.innerHTML = "Character is not found, try another character";
+            errorMessage.style.display = "inline-block";
         }
 
     }
@@ -206,7 +212,9 @@ async function createComicCard(heroID) {
         comicName.innerHTML = comic.title;
         if (comic.prices[0].price !== 0)
             comicPrice.innerHTML = "price: $" + comic.prices[0].price;
-        pageCount.innerHTML = "page count: " + comic.pageCount;
+
+        if (comics.pageCount > 0)
+            pageCount.innerHTML = "page count: " + comic.pageCount;
         if (comic.description !== '' && comic.description !== null) {
             comicDescription.innerText = comic.description;
         } else {

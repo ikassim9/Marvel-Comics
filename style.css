@@ -64,7 +64,23 @@ form>i {
 
 }
 
+.error-container {
 
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.error-message {
+    padding: 10px;
+    border-radius: .25rem;
+    display: none;
+    color: #ba3939;
+    background: #ffe0e0;
+    border: 1px solid #a33a3a;
+    margin-bottom: 2rem;
+}
 
 
 
