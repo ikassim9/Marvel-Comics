@@ -5,23 +5,42 @@ const hash = CryptoJS.MD5(str).toString();
 const base_url = new URL('http://gateway.marvel.com/v1/public');
 const searchBtn = document.getElementById('searchBtn');
 const cardGrid = document.getElementById('heroGrid');
-const currentYear = new Date().getFullYear();
-const errorMessage = document.getElementById('errorMessage')
+const errorMessage = document.getElementById('errorMessage');
+
 
 
 
 // event for when search button is clicked
 
 searchBtn.addEventListener('click', (e) => {
+    removeChildElements();
+    document.querySelector('.preloader').style.display = "block";
+    setTimeout(() => {
+        document.querySelector('.preloader').style.display = "none";
+    }, 2000);
+
+
+
+    setTimeout(searchForCharacter, 2000);
+
+
+
+});
+
+
+
+function searchForCharacter() {
 
     if (searchInput.value !== "") {
+
         createHeroCard();
+
     } else {
         errorMessage.innerHTML = 'Please enter a character name';
         errorMessage.style.display = "inline-block";
     }
 
-});
+}
 
 
 
@@ -36,7 +55,7 @@ async function getHero() {
     console.log(response);
     if (response.code === 200) {
         if (response.data.count == 1) {
-            removeChildElements();
+
             const hero = response.data.results[0];
             console.log("hero", hero);
             errorMessage.style.display = "none";
@@ -157,13 +176,14 @@ async function createHeroCard() {
 // function that just returns a genrated attibution text for marvel api
 
 function getAttributionText() {
+    const currentYear = new Date().getFullYear();
+
     const attributionText = `Data provided by Marvel. © ${currentYear} Marvel`;
     return attributionText;
 }
 
 async function createComicCard(heroID) {
     const comics = await getComics(heroID);
-    console.log(comics);
     // loop through comics and create a comic for each comic in the array
     comics.forEach(comic => {
 
