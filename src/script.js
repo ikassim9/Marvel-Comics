@@ -52,12 +52,12 @@ async function getHero() {
 
     const body = await fetch(request);
     const response = await body.json();
-    console.log(response);
+
     if (response.code === 200) {
         if (response.data.count == 1) {
 
             const hero = response.data.results[0];
-            console.log("hero", hero);
+
             errorMessage.style.display = "none";
             return hero;
         } else {
@@ -76,6 +76,7 @@ async function getComics(heroID) {
     let request = base_url + `/characters/${heroID}/comics?ts=${ts}&apikey=${CONSTANT.apiKey}&hash=${hash}`
     let body = await fetch(request);
     let response = await body.json();
+    console.log("comics: ", response);
     return response.data.results;
 
 }
@@ -189,36 +190,36 @@ async function createComicCard(heroID) {
 
         //create comic container
 
-        let comic_card = document.createElement('div');
+        const comic_card = document.createElement('div');
         comic_card.classList.add('hero-card');
 
 
         // create comic image container
 
-        let comicImageContainer = document.createElement('div');
+        const comicImageContainer = document.createElement('div');
         comicImageContainer.classList.add('card-header', 'card-image');
-        let comic_img = document.createElement('img');
-        let comicName = document.createElement('span');
+        const comic_img = document.createElement('img');
+        const comicName = document.createElement('span');
         comicName.classList.add('comic-name');
 
 
 
         // create comic detail
 
-        let comicDetail = document.createElement('div');
+        const comicDetail = document.createElement('div');
         comicDetail.classList.add('card-detail');
-        let comicDescription = document.createElement('p');
-        let pageCount = document.createElement('p');
+        const comicDescription = document.createElement('p');
+        const pageCount = document.createElement('p');
 
-        let comicPrice = document.createElement('p');
-
+        const comicPrice = document.createElement('p');
+        const characters = document.createElement('span');
 
 
         // create comic footer
 
-        let comicFooter = document.createElement('div');
+        const comicFooter = document.createElement('div');
         comicFooter.classList.add('card-footer');
-        let comicAttribution = document.createElement('p');
+        const comicAttribution = document.createElement('p');
 
         comicImageContainer.appendChild(comic_img);
         comicImageContainer.appendChild(comicName);
