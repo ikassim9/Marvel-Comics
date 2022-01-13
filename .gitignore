@@ -1,1 +1,4 @@
-Helpers.js
+./package-lock.json
+node_modules/*
+.vscode/*
+.env

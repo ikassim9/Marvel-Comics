@@ -1,8 +1,5 @@
 const searchInput = document.getElementById('searchText');
 const ts = new Date().getTime();
-const str = ts + CONSTANT.privateKey + CONSTANT.apiKey;
-const hash = CryptoJS.MD5(str).toString();
-const base_url = new URL('http://gateway.marvel.com/v1/public');
 const searchBtn = document.getElementById('searchBtn');
 const cardGrid = document.getElementById('heroGrid');
 const errorMessage = document.getElementById('errorMessage');
@@ -14,6 +11,7 @@ const errorMessage = document.getElementById('errorMessage');
 
 searchBtn.addEventListener('click', (e) => {
     removeChildElements();
+    // shows loading animation
     document.querySelector('.preloader').style.display = "block";
     setTimeout(() => {
         document.querySelector('.preloader').style.display = "none";
@@ -27,7 +25,11 @@ searchBtn.addEventListener('click', (e) => {
 
 });
 
-
+async function fetch_url(url) {
+    const response = await fetch(url);
+    const body = await response.json();
+    return body;
+}
 
 function searchForCharacter() {
 
@@ -47,39 +49,46 @@ function searchForCharacter() {
 // get the hero the user searched for
 
 async function getHero() {
+    const response = await getComicAndCharacter();
+    const heroResponse = response.hero;
 
-    let request = base_url + `/characters?name=${searchInput.value}&ts=${ts}&apikey=${CONSTANT.apiKey}&hash=${hash}`
+    return heroResponse.data.results[0];
 
-    const body = await fetch(request);
-    const response = await body.json();
-
-    if (response.code === 200) {
-        if (response.data.count == 1) {
-
-            const hero = response.data.results[0];
-
-            errorMessage.style.display = "none";
-            return hero;
-        } else {
-            // show error message if hero is not return from the api
-            errorMessage.innerHTML = "Character is not found, try another character";
-            errorMessage.style.display = "inline-block";
-        }
-
-    }
 }
+
+
+
+
 
 // get comics for the hero by passing in heroID
 
-async function getComics(heroID) {
+async function getComics() {
 
-    let request = base_url + `/characters/${heroID}/comics?ts=${ts}&apikey=${CONSTANT.apiKey}&hash=${hash}`
-    let body = await fetch(request);
-    let response = await body.json();
-    console.log("comics: ", response);
-    return response.data.results;
+
+    const response = await getComicAndCharacter();
+
+    return response.comics.data.results;
 
 }
+
+
+async function getComicAndCharacter() {
+    let request = `/${searchInput.value}`
+
+    const body = await fetch(request);
+
+    if (body.status !== 200) {
+        errorMessage.innerHTML = "Character is not found, try another character";
+        errorMessage.style.display = "inline-block";
+        return;
+    }
+
+    const response = await body.json();
+    errorMessage.style.display = "none";
+    return response
+
+}
+
 
 
 
@@ -87,6 +96,7 @@ async function getComics(heroID) {
 // this functions takes the hero data and creates a grid card
 async function createHeroCard() {
     const hero = await getHero();
+
 
     // hero card which holds the entire hero
     let heroCard = document.createElement('div');
@@ -169,7 +179,7 @@ async function createHeroCard() {
 
     // create comic card and add it to the grid
 
-    createComicCard(hero.id);
+    createComicCard();
 
 
 }
@@ -183,8 +193,9 @@ function getAttributionText() {
     return attributionText;
 }
 
-async function createComicCard(heroID) {
-    const comics = await getComics(heroID);
+async function createComicCard() {
+    const comics = await getComics();
+
     // loop through comics and create a comic for each comic in the array
     comics.forEach(comic => {
 
