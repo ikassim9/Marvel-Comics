@@ -12,7 +12,7 @@ const PORT = process.env.PORT
 
 
 
-app.use(express.static('public'));
+app.use(express.static('public/src'));
 
 app.listen(PORT, function () {
     console.log("Express server listening on port", PORT);
