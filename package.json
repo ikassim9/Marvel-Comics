@@ -10,8 +10,17 @@
     "express": "^4.17.2",
     "node-fetch": "^3.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "node_modules/*",
+      "src/*"
+    ]
+  },
   "scripts": {
+    "watch": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
