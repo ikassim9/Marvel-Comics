@@ -14,12 +14,11 @@ const port = process.env.PORT || 3000;
 
 app.use(express.static('public/src'));
 
-app.listen(port, function () {
-    console.log(`Express server listening at http://localhost${port}`);
-});
+
 
 
 app.get('/:heroName', async (req, res) => {
+    console.log(req.params.heroName);
     const heroName = req.params.heroName;
     const hero = await getHero(heroName);
 
@@ -47,6 +46,10 @@ app.get('/:heroName', async (req, res) => {
 
 });
 
+
+app.listen(port, function () {
+    console.log(`Express server listening at http://localhost${port}`);
+});
 // send a get request to marvel api to retreive the given character
 async function getHero(heroName) {
 
