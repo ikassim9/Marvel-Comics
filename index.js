@@ -8,14 +8,14 @@ const ts = new Date().getTime();
 const str = ts + process.env.privateKey + process.env.apikey;
 const hash = CryptoJS.MD5(str).toString().toLowerCase();
 const base_url = new URL('http://gateway.marvel.com/v1/public');
-const PORT = process.env.PORT
+const port = 3000;
 
 
 
 app.use(express.static('public/src'));
 
-app.listen(PORT, function () {
-    console.log("Express server listening on port", PORT);
+app.listen(process.env.PORT || port, function () {
+    console.log(`Express server listening at http://localhost${port}`);
 });
 
 
