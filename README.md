@@ -4,16 +4,16 @@
 
 # Empty State
 
-<img src="img/empty%20state.png" width="350">
+<img src="img/empty%20state.png" width="600">
 
 # Search for a character
 
-<img src="img/character%20search.png" width="350">
+<img src="img/character%20search.png" width="600">
 
 # Comics for the character
 
-<img src="img/comics.png" width="350">
+<img src="img/comics.png" width="600">
 
 # Character is not found
 
-<img src="img/character%20not%20found.png" width="350">
+<img src="img/character%20not%20found.png" width="600">
