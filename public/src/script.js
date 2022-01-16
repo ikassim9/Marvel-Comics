@@ -3,8 +3,7 @@ const ts = new Date().getTime();
 const searchBtn = document.getElementById('searchBtn');
 const cardGrid = document.getElementById('heroGrid');
 const errorMessage = document.getElementById('errorMessage');
-
-
+const base_url = window.location.origin;
 
 
 // event for when search button is clicked
@@ -25,11 +24,7 @@ searchBtn.addEventListener('click', (e) => {
 
 });
 
-async function fetch_url(url) {
-    const response = await fetch(url);
-    const body = await response.json();
-    return body;
-}
+
 
 function searchForCharacter() {
 
@@ -73,7 +68,8 @@ async function getComics() {
 
 
 async function getComicAndCharacter() {
-    let request = `/${searchInput.value}`
+
+    let request = `${base_url}/${searchInput.value}`
 
     const body = await fetch(request);
 
