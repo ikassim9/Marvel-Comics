@@ -22,6 +22,7 @@ app.get('/:heroName', async (req, res) => {
     const heroName = req.params.heroName;
     const hero = await getHero(heroName);
 
+    console.log(hero);
     // if the hero is not found, then send 404 status code
     if (hero.data.count < 1) {
         res.status(404).send('Character not found');
