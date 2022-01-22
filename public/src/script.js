@@ -1,14 +1,16 @@
 const searchInput = document.getElementById('searchText');
 const ts = new Date().getTime();
-const searchBtn = document.getElementById('searchBtn');
+const form = document.getElementById('form');
 const cardGrid = document.getElementById('heroGrid');
 const errorMessage = document.getElementById('errorMessage');
-const base_url = window.location.origin;
+const base_url = "https://comics-side-project.herokuapp.com";
 
 
 // event for when search button is clicked
 
-searchBtn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('searching for character');
     removeChildElements();
     // shows loading animation
     document.querySelector('.preloader').style.display = "block";
@@ -17,8 +19,9 @@ searchBtn.addEventListener('click', (e) => {
     }, 2000);
 
 
-
-    setTimeout(searchForCharacter, 2000);
+    setTimeout(() => {
+        searchForCharacter();
+    }, 2000)
 
 
 
@@ -41,34 +44,9 @@ function searchForCharacter() {
 
 
 
-// get the hero the user searched for
-
-async function getHero() {
-    const response = await getComicAndCharacter();
-    const heroResponse = response.hero;
-
-    return heroResponse.data.results[0];
-
-}
-
-
-
-
-
-// get comics for the hero by passing in heroID
-
-async function getComics() {
-
-
-    const response = await getComicAndCharacter();
-
-    return response.comics.data.results;
-
-}
-
-
 async function getComicAndCharacter() {
-
+    console.log("Fetch from ", base_url);
+    console.log('getting comic and character');
     let request = `${base_url}/${searchInput.value}`
 
     const body = await fetch(request);
@@ -91,7 +69,8 @@ async function getComicAndCharacter() {
 
 // this functions takes the hero data and creates a grid card
 async function createHeroCard() {
-    const hero = await getHero();
+    const response = await getComicAndCharacter();
+    const hero = response.hero.data.results[0];
 
 
     // hero card which holds the entire hero
@@ -190,7 +169,13 @@ function getAttributionText() {
 }
 
 async function createComicCard() {
-    const comics = await getComics();
+
+    // returns a response which contains both hero and comics
+    const response = await getComicAndCharacter();
+
+
+    // get the comics for the hero
+    const comics = response.comics.data.results;
 
     // loop through comics and create a comic for each comic in the array
     comics.forEach(comic => {

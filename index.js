@@ -8,7 +8,7 @@ const ts = new Date().getTime();
 const str = ts + process.env.privateKey + process.env.apikey;
 const hash = CryptoJS.MD5(str).toString().toLowerCase();
 const base_url = new URL('http://gateway.marvel.com/v1/public');
-const port = process.env.PORT | 80;
+const port = process.env.PORT || 3000;
 const host = '0.0.0.0';
 
 
@@ -49,7 +49,7 @@ app.get('/:heroName', async (req, res) => {
 
 
 app.listen(port, host, function () {
-    console.log(`Express server listening at http://localhost${port}`);
+    console.log(`Express server listening at http://localhost:${port}`);
 });
 // send a get request to marvel api to retreive the given character
 async function getHero(heroName) {
