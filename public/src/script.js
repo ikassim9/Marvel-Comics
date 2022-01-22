@@ -3,8 +3,7 @@ const ts = new Date().getTime();
 const form = document.getElementById('form');
 const cardGrid = document.getElementById('heroGrid');
 const errorMessage = document.getElementById('errorMessage');
-const base_url = "https://comics-side-project.herokuapp.com";
-
+const base_url = window.location.href;
 
 // event for when search button is clicked
 
@@ -47,7 +46,7 @@ function searchForCharacter() {
 async function getComicAndCharacter() {
     console.log("Fetch from ", base_url);
     console.log('getting comic and character');
-    let request = `${base_url}/${searchInput.value}`
+    let request = `${base_url}${searchInput.value}`
 
     const body = await fetch(request);
 
