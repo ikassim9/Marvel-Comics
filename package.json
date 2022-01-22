@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Uses marvel api to fetch comics",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "cross-fetch": "^3.1.4",
     "crypto-js": "^4.1.1",
