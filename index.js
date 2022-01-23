@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 var CryptoJS = require("crypto-js");
 const ts = new Date().getTime();
-const str = ts + process.env.privateKey + process.env.apikey;
+const str = ts + process.env.privateKey + process.env.apiKey;
 const hash = CryptoJS.MD5(str).toString().toLowerCase();
 const base_url = new URL('http://gateway.marvel.com/v1/public');
 const port = process.env.PORT || 3000;
@@ -19,11 +19,9 @@ app.use(express.static('public/src'));
 
 
 app.get('/:heroName', async (req, res) => {
-    console.log("Hero name ", req.params.heroName);
     const heroName = req.params.heroName;
     const hero = await getHero(heroName);
 
-    console.log("Hero: ", hero)
 
     // if the hero is not found, then send 404 status code
     if (hero.data.count < 1) {

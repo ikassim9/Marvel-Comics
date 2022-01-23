@@ -9,7 +9,6 @@ const base_url = window.location.href;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('searching for character');
     removeChildElements();
     // shows loading animation
     document.querySelector('.preloader').style.display = "block";
@@ -44,8 +43,7 @@ function searchForCharacter() {
 
 
 async function getComicAndCharacter() {
-    console.log("Fetch from ", base_url);
-    console.log('getting comic and character');
+
     let request = `${base_url}${searchInput.value}`
 
     const body = await fetch(request);
