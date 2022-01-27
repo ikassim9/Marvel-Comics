@@ -9,12 +9,8 @@ const base_url = window.location.href;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    removeChildElements();
-    // shows loading animation
-    document.querySelector('.preloader').style.display = "block";
-    setTimeout(() => {
-        document.querySelector('.preloader').style.display = "none";
-    }, 2000);
+
+    loadingAnimation();
 
 
     setTimeout(() => {
@@ -25,7 +21,30 @@ form.addEventListener('submit', (e) => {
 
 });
 
+/**
+ * Shows an animation to user while the data is fetch
+ */
 
+function loadingAnimation() {
+    removeChildElements();
+
+    document.querySelector('.preloader').style.display = "block";
+    setTimeout(() => {
+        document.querySelector('.preloader').style.display = "none";
+    }, 2000);
+}
+
+
+
+
+
+
+
+/**
+ * 
+ * Takes user input and searches for a character.
+ *  
+ */
 
 function searchForCharacter() {
 
@@ -41,6 +60,11 @@ function searchForCharacter() {
 }
 
 
+/**
+ * Send a fetches request to the server and passes user input as param
+ *
+ *  
+ */
 
 async function getComicAndCharacter() {
 
