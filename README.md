@@ -1,6 +1,6 @@
 # **API to display marvel characters and its related comics**
 
-### This application will be used to fetch data from the marvel api. It will take user input and return the given character and comics that the character is present in.
+### This application will be used to fetch data from the marvel api. It will take user input and return the given character and comics that the character is present in. You can visit [here](https://comics-side-project.herokuapp.com/) to interact with the application.
 
  <br>
 
