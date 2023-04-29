@@ -80,5 +80,5 @@ npm run watch
 
 - How to set up a node js server
 - Connecting the server to heroku
-- Fetching data from client and sending response back
+- Fetching data from server and sending response back to the client
 - Parsing json response and displaying it to user
