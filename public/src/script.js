@@ -71,6 +71,7 @@ async function getComicAndCharacter() {
     let request = `${base_url}${searchInput.value}`
 
     const body = await fetch(request);
+    console.log(body);
 
     if (body.status !== 200) {
         errorMessage.innerHTML = "Character is not found, try another character";
