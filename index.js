@@ -9,7 +9,7 @@ const ts = new Date().getTime();
 const str = ts + process.env.privateKey + process.env.apiKey;
 const hash = CryptoJS.MD5(str).toString().toLowerCase();
 const base_url = new URL("http://gateway.marvel.com/v1/public");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const host = "0.0.0.0";
 
 app.use(express.static("public/src"));

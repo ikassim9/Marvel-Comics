@@ -16,7 +16,7 @@ RUN npm install
  
  COPY . .
 
- EXPOSE 80
+ EXPOSE 8080
 
 # Start the app using serve command
 CMD ["npm", "start"]
